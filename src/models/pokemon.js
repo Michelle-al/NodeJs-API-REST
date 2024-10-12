@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        // todo check right message for unique name
+
         name: {
             type: DataTypes.STRING,
             allowNull: false,
