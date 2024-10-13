@@ -25,17 +25,30 @@ const bcrypt = require('bcrypt')
 //     dialect: 'mysql',
 //     logging: false
 // })
-const sequelize = new Sequelize('pokedex', 'postgres', 'root', {
-    host: 'localhost',
-    dialect: 'postgres',
-})
+
+let sequelize
+
+if(process.env.NODE_ENV === 'production') {
+    sequelize = new Sequelize('koyebdb', 'koyeb-adm', 'FqvaMjU9R3tx', {
+        host: 'ep-calm-truth-a2bbacny.eu-central-1.pg.koyeb.app',
+        dialect: 'postgres',
+        logging: true
+    })
+} else {
+    sequelize = new Sequelize('pokedex', 'postgres', 'root', {
+        host: 'localhost',
+        dialect: 'postgres',
+        logging: true
+    })
+}
+
 
 // on instancie les modèles
 const Pokemon = PokemonModel(sequelize, DataTypes)
 const User = UserModel(sequelize,DataTypes)
 
 const initDb = () => {
-    return sequelize.sync({force: true}).then(_ => {
+    return sequelize.sync().then(_ => {
         pokemons.map(pokemon => {
             Pokemon.create({
                 name: pokemon.name,
