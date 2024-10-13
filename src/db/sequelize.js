@@ -30,14 +30,14 @@ let sequelize
 
 if(process.env.NODE_ENV === 'production') {
     sequelize = new Sequelize('postgres://koyeb-adm:FqvaMjU9R3tx@ep-calm-truth-a2bbacny.eu-central-1.pg.koyeb.app/koyebdb', {
-        ssl:true
+        "dialectOptions": {
+            "ssl": true
+        }
     })
 
 } else {
 
-    sequelize = new Sequelize('postgres://postgres:root@localhost/pokedex', {
-        ssl: true
-    })
+    sequelize = new Sequelize('postgres://postgres:root@localhost/pokedex')
 }
 
 
