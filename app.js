@@ -5,6 +5,7 @@ const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const path = require('path')
 const sequelize = require('./src/db/sequelize')
+const cors = require('cors')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -42,6 +43,7 @@ app
     //.use(morgan('dev'))
     .use(favicon(path.join(__dirname, 'favicon.ico')))
     .use(bodyParser.json())
+    .use(cors())
     // .use(favicon(__dirname + '/favicon.ico'))
 
 // Connexion à la BDD et initialisation
